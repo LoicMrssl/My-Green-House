@@ -10,7 +10,6 @@
 CREATE TABLE serre(
         position Char (25) NOT NULL ,
         effectif Int ,
-        Id       Int ,
         PRIMARY KEY (position )
 )ENGINE=InnoDB;
 
