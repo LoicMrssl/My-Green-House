@@ -8,59 +8,27 @@
 #------------------------------------------------------------
 
 CREATE TABLE serre(
-        Position Int NOT NULL ,
-        Effectif Int ,
-        PRIMARY KEY (Position )
+        position Char (25) NOT NULL ,
+        effectif Int ,
+        Id       Int ,
+        PRIMARY KEY (position )
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: Plante
+# Table: plante
 #------------------------------------------------------------
 
-CREATE TABLE Plante(
-        Nom Char (25) NOT NULL ,
-	Image Char ,
-        PRIMARY KEY (Nom )
+CREATE TABLE plante(
+        Id         Int NOT NULL ,
+        nom        Char (25) ,
+        url        Char (25) ,
+        seuil_lum  Int ,
+        temp       Int ,
+        humidite   Int ,
+        besoin_eau Int ,
+        maturation Int ,
+        PRIMARY KEY (Id )
 )ENGINE=InnoDB;
 
-
-#------------------------------------------------------------
-# Table: Caractéristiques
-#------------------------------------------------------------
-
-CREATE TABLE Caracteristiques(
-        Seuil_de_luminosite Int NOT NULL ,
-        Temperature         Int ,
-        Humidite            Int ,
-        Besoin_en_eau       Int ,
-        Maturation          Int ,
-        PRIMARY KEY (Seuil_de_luminosite )
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: Planter
-#------------------------------------------------------------
-
-CREATE TABLE Planter(
-        Position Int NOT NULL ,
-        Nom      Char (25) NOT NULL ,
-        PRIMARY KEY (Position ,Nom )
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: Détailler
-#------------------------------------------------------------
-
-CREATE TABLE Detailler(
-        Nom                 Char (25) NOT NULL ,
-        Seuil_de_luminosite Int NOT NULL ,
-        PRIMARY KEY (Nom ,Seuil_de_luminosite )
-)ENGINE=InnoDB;
-
-ALTER TABLE Planter ADD CONSTRAINT FK_Planter_Position FOREIGN KEY (Position) REFERENCES serre(Position);
-ALTER TABLE Planter ADD CONSTRAINT FK_Planter_Nom FOREIGN KEY (Nom) REFERENCES Plante(Nom);
-ALTER TABLE Detailler ADD CONSTRAINT FK_Detailler_Nom FOREIGN KEY (Nom) REFERENCES Plante(Nom);
-ALTER TABLE Detailler ADD CONSTRAINT FK_Detailler_Seuil_de_luminosite FOREIGN KEY (Seuil_de_luminosite) REFERENCES Caracteristiques(Seuil_de_luminosite);
+ALTER TABLE serre ADD CONSTRAINT FK_serre_Id FOREIGN KEY (Id) REFERENCES plante(Id);
