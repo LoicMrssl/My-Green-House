@@ -1,0 +1,13 @@
+-- ajout d'une nouvelle plante dans la table plante
+insert into plante	-- dans l'ordre : (id,nom,url,seuil_lum,temp,humidite,besoin_eau,maturation)
+values (0,'tomates','url.tomates',1,2,3,4,5);
+
+
+
+-- ajout d'une plante dans la serre
+insert into serre	-- dans l'ordre : (position,effectif,id)
+values ('00',30,0);
+
+
+-- suppression plante à la position XX
+delete from serre where position='00';
