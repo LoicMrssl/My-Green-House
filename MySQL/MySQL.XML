@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MySQL</name>
+    </assembly>
+    <members>
+        <member name="F:DBConnect.connection">
+            <summary>
+            The connection
+            </summary>
+        </member>
+        <member name="F:DBConnect.server">
+            <summary>
+            MySQL server adress
+            </summary>
+        </member>
+        <member name="F:DBConnect.database">
+            <summary>
+            name of the database on the server
+            </summary>
+        </member>
+        <member name="F:DBConnect.uid">
+            <summary>
+            User Identifiant
+            </summary>
+        </member>
+        <member name="F:DBConnect.psw">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="F:DBConnect.status">
+            <summary>
+            Inform on the connection status
+            </summary>
+        </member>
+        <member name="M:DBConnect.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DBConnect"/> class.
+            </summary>
+        </member>
+        <member name="M:DBConnect.Initialize(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes this instance.
+            </summary>
+        </member>
+        <member name="M:DBConnect.OpenConnection">
+            <summary>
+            Opens the connection.
+            </summary>
+        </member>
+        <member name="M:DBConnect.CloseConnection">
+            <summary>
+            Closes the connection.
+            </summary>
+        </member>
+        <member name="M:DBConnect.Insert(System.String,System.String)">
+            <summary>
+            Inserts a statement into a table.
+            </summary>
+        </member>
+        <member name="M:DBConnect.Update(System.String,System.String,System.String)">
+            <summary>
+            Updates a statement in a table
+            </summary>
+        </member>
+        <member name="M:DBConnect.Request(System.String)">
+            <summary>
+            To enter an SQL request
+            </summary>
+        </member>
+        <member name="M:DBConnect.Delete(System.String,System.String)">
+            <summary>
+            Deletes the specified table.
+            </summary>
+        </member>
+        <member name="M:DBConnect.Count(System.String)">
+            <summary>
+            Counts the specified table.
+            </summary>
+        </member>
+        <member name="M:DBConnect.StringToTab(System.String)">
+            <summary>
+            Strings to tab.
+            </summary>
+            <param name="s">string wich will be cnovert into a sting array</param>
+            <returns></returns>
+        </member>
+        <member name="M:DBConnect.Select(System.String,System.String)">
+            <summary>
+            Selects and return a table of your choice
+            </summary>
+        </member>
+        <member name="T:MySQL.Program">
+            <seealso cref="T:Constellation.Package.PackageBase" />
+        </member>
+        <member name="F:MySQL.Program.database">
+            <summary>
+            The database
+            </summary>
+        </member>
+        <member name="M:MySQL.Program.Main(System.String[])">
+            <summary>
+            Mains the specified arguments.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:MySQL.Program.OnStart">
+            <summary>
+            Called when the package is started.
+            </summary>
+        </member>
+        <member name="M:MySQL.Program.Insert_BD(System.String,System.String)">
+            <summary>
+            Inserts a statement in a selected table
+            </summary>
+            <param name="table_arg">Name of the table with arguments ex: nomtable(id1,id2,id3)</param>
+            <param name="values">Values to add ex : (1,'John Smith', '33')</param>
+        </member>
+        <member name="M:MySQL.Program.Update_BD(System.String,System.String,System.String)">
+            <summary>
+            Updates a statement in a selected line of a table
+            </summary>
+            <param name="table_arg">Name of the table with arguments ex: nomtable(id1,id2,id3)</param>
+            <param name="values_change">Values to change ex : name='Joe', age='22'</param>
+            <param name="condition">Condition to select the statement ex : name='John Smith'</param>
+        </member>
+        <member name="M:MySQL.Program.Request_BD(System.String)">
+            <summary>
+            Operate a script directly in MySQL server
+            </summary>
+            <param name="query">SQL request</param>
+        </member>
+        <member name="M:MySQL.Program.Deleted_BD(System.String,System.String)">
+            <summary>
+            Deletes the specified table.
+            </summary>
+            <param name="table_arg">Name of the table with arguments ex: nomtable(id1,id2,id3)</param>
+            <param name="condition_del">Condition to select the ligne wich will be deleted ex : name='John Smith'</param>
+        </member>
+        <member name="M:MySQL.Program.Count_BD(System.String)">
+            <summary>
+            Counts statement of selected table
+            </summary>
+            <param name="table_noarg">Name of the table ex: nomtable (no arguments necessary here).</param>
+            <returns></returns>
+        </member>
+        <member name="M:MySQL.Program.Select_BD(System.String,System.String)">
+            <summary>
+            Selects and return different collumn of your coice in a double array
+            </summary>
+            <param name="table_noarg">Name of the table ex: nomtable (no arguments necessary here).</param>
+            <param name="selection">column needed in a table ex : "id1,id2" </param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
