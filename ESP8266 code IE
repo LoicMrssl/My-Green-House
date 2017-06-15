@@ -1,0 +1,95 @@
+// bibliothèques requises pour le bon fonctionnement de notre DHT11 :
+
+#include <DHT.h>
+#include <DHT_U.h>
+#include <Adafruit_Sensor.h>
+
+// Bibliothèque requise pour le fonctionnement de notre ESP8266 en wifi :
+
+#include <ESP8266WiFi.h>
+
+// bibliothèque requise pour la connexion à notre constellation :
+
+#include <Constellation.h>
+
+// définition du type de DHT et du pin sur lequel celui-ci est placé dans notre montage :
+
+#define DHTPIN D3 // sur le pin D3 de l'esp
+#define DHTTYPE DHT11 //nous utilisons ici un DHT11
+DHT dht(DHTPIN, DHTTYPE); // affectation de nos paramètres
+
+// paramètres wifi et constellation : 
+
+char ssid[] = "HONOR";
+char password[] = "12345678";
+Constellation<WiFiClient> constellation("192.168.43.55", 8088, "ESP8266", "MyVirtualPackage", "123");
+
+// déclaration de variable locale :
+
+int interval = 10000; // en ms
+
+// setup :
+
+void setup()
+{  
+  Serial.begin(115200);
+  dht.begin(); // permet la lecture sur le DHT
+  pinMode (A0, OUTPUT); //permet la lecture sur le capteur de luminosité
+ 
+   // Connexion à la wifi :  
+  
+  WiFi.begin("HONOR", "12345678");  
+  while (WiFi.status() != WL_CONNECTED) 
+  {
+    delay(500);
+  }
+
+ // verification de la connexion dans les logs de notre constellation : 
+ 
+  constellation.writeInfo("Connecté à notre serre ");
+
+}
+
+void loop() 
+{
+
+  delay(2000); // le DHT 11 a besoin de 2 sec pour commecer à capter des valeurs
+  constellation.loop();
+
+  // récuperation des valeurs sur les capteurs : 
+  
+  int Lumos = analogRead(A0)/2;  // on divise par 2 la valeur captée en lux car nous avons une résistance de 10k Ohms intégrée dans notre capteur
+  float Humi = dht.readHumidity();
+  float Temp = dht.readTemperature();
+
+  // cadence à laquelle on envoie un nouveau StateObject sur notre constellation :
+  
+  static int lastBeat = 0;
+  if(millis() - lastBeat > interval) 
+  {
+    lastBeat = millis();
+
+    //Luminosité
+
+    if(!isnan(Lumos))
+    {
+      constellation.pushStateObject("Luminosité", Lumos, interval * 2);
+    }
+   
+    // Temperature
+    
+    if (!isnan(Temp))
+    {
+      constellation.pushStateObject("Temperature", Temp, interval * 2);
+    }
+    
+    // Humidité
+    
+    if (!isnan(Humi))
+    {
+      constellation.pushStateObject("Humidity", Humi, interval * 2);
+    }
+  }
+  
+
+}
